@@ -187,7 +187,7 @@ WHERE m1.memid <> 0;
 /* Q12: Find the facilities with their usage by member, but not guests */
 
 A12:
-SELECT f.name AS facility, COUNT(b.slots) AS member_usage
+SELECT f.name AS facility, SUM(b.slots) AS member_usage
 FROM `Bookings` AS b 
 INNER JOIN `Facilities` AS f 
 ON f.facid = b.facid
@@ -198,7 +198,7 @@ GROUP BY f.name;
 /* Q13: Find the facilities usage by month, but not guests */
 
 A13:
-SELECT f.name AS facility, strftime('%m', b.starttime) AS month, COUNT(b.slots) AS member_usage 
+SELECT f.name AS facility, strftime('%m', b.starttime) AS month, SUM(b.slots) AS member_usage 
 FROM `Bookings` AS b 
 INNER JOIN `Facilities` AS f 
 ON f.facid = b.facid 
